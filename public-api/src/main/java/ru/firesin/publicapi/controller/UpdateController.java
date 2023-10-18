@@ -6,6 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.firesin.publicapi.service.UpdateProducer;
 import ru.firesin.publicapi.utils.MessageUtils;
 
+import static ru.firesin.RabbitQueue.*;
+
 /**
  * Author:    firesin
  * Date:      16.10.2023
@@ -28,12 +30,49 @@ public class UpdateController {
         this.telegramBot = telegramBot;
     }
 
-    public void proccesUpdate(Update update) {
-        var sndMsg = messageUtils.generateSendMessage(update, "Куку епта!");
-        setView(sndMsg);
+    public void processUpdate(Update update) {
+        if (update == null) {
+            log.error("Полученный Update null");
+            return;
+        }
+        if (update.getMessage() != null) {
+            distributeMessageByType(update);
+        } else {
+            log.error("Не поддерживаемый формат сообщения " + update);
+        }
     }
 
-    private void setView(SendMessage sndMsg) {
+    private void distributeMessageByType(Update update) {
+        var msg = update.getMessage();
+        if (msg.getText() != null) {
+            processTextMessage(update);
+        } else if (msg.getDocument() != null) {
+            processDocumentMessage(update);
+        } else if (msg.getPhoto() != null) {
+            processPhotoMessage(update);
+        } else {
+            setUnsupportedTypeMessage(update);
+        }
+    }
+
+    private void setUnsupportedTypeMessage(Update update) {
+        var sendMessage = messageUtils.generateSendMessage(update, "Неподдерживаемый формат сообщения");
+        setView(sendMessage);
+    }
+
+    private void processPhotoMessage(Update update) {
+        updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
+    }
+
+    private void processDocumentMessage(Update update) {
+        updateProducer.produce(DOC_MESSAGE_UPDATE, update);
+    }
+
+    private void processTextMessage(Update update) {
+        updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
+    }
+
+    public void setView(SendMessage sndMsg) {
         telegramBot.sendAnswer(sndMsg);
     }
 }

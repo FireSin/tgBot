@@ -36,7 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         log.info("Получено сообщение от " + update.getMessage().getFrom().getUserName());
-        updateController.proccesUpdate(update);
+        updateController.processUpdate(update);
     }
 
     public void sendAnswer(SendMessage msg){
