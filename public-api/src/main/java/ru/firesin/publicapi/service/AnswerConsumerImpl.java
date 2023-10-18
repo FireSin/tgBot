@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.firesin.publicapi.controller.UpdateController;
 
-import static ru.firesin.RabbitQueue.ANSWER_MESSAGE_UPDATE;
+import static ru.firesin.RabbitQueue.ANSWER_MESSAGE;
 
 /**
  * Author:    firesin
@@ -21,7 +21,7 @@ public class AnswerConsumerImpl implements AnswerConsumer {
 
     private final UpdateController updateController;
     @Override
-    @RabbitListener(queues = ANSWER_MESSAGE_UPDATE)
+    @RabbitListener(queues = ANSWER_MESSAGE)
     public void consume(SendMessage sendMessage) {
         updateController.setView(sendMessage);
     }

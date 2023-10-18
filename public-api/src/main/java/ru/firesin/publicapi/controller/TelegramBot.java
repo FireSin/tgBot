@@ -2,6 +2,8 @@ package ru.firesin.publicapi.controller;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,11 +17,12 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  */
 
 @Slf4j
+@Controller
 public class TelegramBot extends TelegramLongPollingBot {
     private final UpdateController updateController;
     private final String botUsername;
 
-    public TelegramBot(String botUsername, String botToken, UpdateController updateController) {
+    public TelegramBot(@Value("${bot.name}") String botUsername, @Value("${bot.token}") String botToken, UpdateController updateController) {
         super(botToken);
         this.botUsername = botUsername;
         this.updateController = updateController;

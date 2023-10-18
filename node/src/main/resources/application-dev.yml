@@ -1,0 +1,6 @@
+server:
+  port: 8084
+
+spring:
+  config:
+    import: "classpath:rabbit-config.yml"

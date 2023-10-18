@@ -1,6 +1,7 @@
 package ru.firesin.publicapi.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.firesin.publicapi.service.UpdateProducer;
@@ -14,6 +15,7 @@ import static ru.firesin.RabbitQueue.*;
  */
 
 @Slf4j
+@Controller
 public class UpdateController {
 
     private final MessageUtils messageUtils;

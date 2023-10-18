@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.firesin.service.ProducerService;
 
-import static ru.firesin.RabbitQueue.ANSWER_MESSAGE_UPDATE;
+import static ru.firesin.RabbitQueue.ANSWER_MESSAGE;
 
 /**
  * Author:    firesin
@@ -21,6 +21,6 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public void produceAnswer(SendMessage sendMessage) {
-        rabbitTemplate.convertAndSend(ANSWER_MESSAGE_UPDATE, sendMessage);
+        rabbitTemplate.convertAndSend(ANSWER_MESSAGE, sendMessage);
     }
 }
