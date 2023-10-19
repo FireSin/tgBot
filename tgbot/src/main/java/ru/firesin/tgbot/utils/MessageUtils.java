@@ -1,4 +1,4 @@
-package ru.firesin.publicapi.utils;
+package ru.firesin.tgbot.utils;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -16,6 +16,7 @@ public class MessageUtils {
         var message = update.getMessage();
         var sendMsg = new SendMessage();
         sendMsg.setChatId(message.getChatId());
+        sendMsg.setMessageThreadId(message.getMessageThreadId());
         sendMsg.setText(text);
         return sendMsg;
     }

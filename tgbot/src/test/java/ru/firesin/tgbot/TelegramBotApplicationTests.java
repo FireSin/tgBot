@@ -1,8 +1,8 @@
-package ru.firesin.publicapi;
+package ru.firesin.tgbot;
 
 import org.junit.jupiter.api.Test;
 
-class PublicApiApplicationTests {
+class TelegramBotApplicationTests {
 
     @Test
     void contextLoads() {

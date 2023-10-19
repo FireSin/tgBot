@@ -1,11 +1,11 @@
-package ru.firesin.publicapi.service;
+package ru.firesin.tgbot.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import ru.firesin.publicapi.controller.UpdateController;
+import ru.firesin.tgbot.controller.UpdateController;
 
 import static ru.firesin.RabbitQueue.ANSWER_MESSAGE;
 

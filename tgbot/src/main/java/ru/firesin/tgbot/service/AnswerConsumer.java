@@ -1,4 +1,4 @@
-package ru.firesin.publicapi.service;
+package ru.firesin.tgbot.service;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 

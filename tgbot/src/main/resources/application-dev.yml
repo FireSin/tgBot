@@ -1,4 +1,6 @@
-spring:
 
+spring:
   config:
     import: "classpath:bot-config.yml, classpath:rabbit-config.yml"
+server:
+  port: 8083

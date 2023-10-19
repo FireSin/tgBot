@@ -1,11 +1,11 @@
-package ru.firesin.publicapi.controller;
+package ru.firesin.tgbot.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.firesin.publicapi.service.UpdateProducer;
-import ru.firesin.publicapi.utils.MessageUtils;
+import ru.firesin.tgbot.service.UpdateProducer;
+import ru.firesin.tgbot.utils.MessageUtils;
 
 import static ru.firesin.RabbitQueue.*;
 
@@ -46,11 +46,11 @@ public class UpdateController {
 
     private void distributeMessageByType(Update update) {
         var msg = update.getMessage();
-        if (msg.getText() != null) {
+        if (msg.hasText()) {
             processTextMessage(update);
-        } else if (msg.getDocument() != null) {
+        } else if (msg.hasDocument()) {
             processDocumentMessage(update);
-        } else if (msg.getPhoto() != null) {
+        } else if (msg.hasPhoto()) {
             processPhotoMessage(update);
         } else {
             setUnsupportedTypeMessage(update);

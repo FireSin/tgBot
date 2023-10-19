@@ -1,4 +1,4 @@
-package ru.firesin.publicapi.service;
+package ru.firesin.tgbot.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

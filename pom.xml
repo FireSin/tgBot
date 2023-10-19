@@ -16,7 +16,7 @@
     </parent>
 
     <modules>
-        <module>public-api</module>
+        <module>tgbot</module>
         <module>rabbitMq</module>
         <module>node</module>
     </modules>
