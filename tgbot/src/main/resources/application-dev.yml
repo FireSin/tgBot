@@ -1,6 +1,9 @@
 
 spring:
+  devtools:
+    livereload:
+      port: 8081
   config:
-    import: "classpath:bot-config.yml, classpath:rabbit-config.yml"
+    import: "classpath:bot-config.yml, classpath:rabbit-config.yml, classpath:db_config.yml"
 server:
   port: 8083

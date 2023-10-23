@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import ru.firesin.tgbot.utils.CommandConfiguration;
+import ru.firesin.tgbot.config.CommandConfig;
 
 /**
  * Author:    firesin
@@ -23,13 +23,13 @@ import ru.firesin.tgbot.utils.CommandConfiguration;
 @Controller
 public class TelegramBot extends TelegramLongPollingBot {
 
-    private final CommandConfiguration commandConfiguration;
+    private final CommandConfig commandConfig;
     private final UpdateController updateController;
     private final String botUsername;
 
-    public TelegramBot(@Value("${bot.name}") String botUsername, @Value("${bot.token}") String botToken, CommandConfiguration commandConfiguration, UpdateController updateController) {
+    public TelegramBot(@Value("${bot.name}") String botUsername, @Value("${bot.token}") String botToken, CommandConfig commandConfig, UpdateController updateController) {
         super(botToken);
-        this.commandConfiguration = commandConfiguration;
+        this.commandConfig = commandConfig;
         this.updateController = updateController;
         this.botUsername = botUsername;
     }
@@ -39,7 +39,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(this);
         updateController.registerBot(this);
-        this.execute(new SetMyCommands(commandConfiguration.getBotCommands(), new BotCommandScopeDefault(), null));
+        this.execute(new SetMyCommands(commandConfig.getBotCommands(), new BotCommandScopeDefault(), null));
         log.info("Бот " + botUsername + " создан");
     }
 
