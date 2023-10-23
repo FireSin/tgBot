@@ -4,10 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.firesin.tgbot.service.UpdateProducer;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import ru.firesin.tgbot.service.mq.UpdateProducer;
+import ru.firesin.tgbot.config.CommandConfig;
 import ru.firesin.tgbot.utils.MessageUtils;
 
-import static ru.firesin.RabbitQueue.*;
+import java.util.Optional;
+
+import static ru.firesin.feature.rabbitMq.RabbitQueue.*;
 
 /**
  * Author:    firesin
@@ -20,12 +24,15 @@ public class UpdateController {
 
     private final MessageUtils messageUtils;
     private final UpdateProducer updateProducer;
+    private final CommandConfig commandConfig;
     private TelegramBot telegramBot;
 
 
-    public UpdateController(MessageUtils messageUtils, UpdateProducer updateProducer) {
+
+    public UpdateController(MessageUtils messageUtils, UpdateProducer updateProducer, CommandConfig commandConfig) {
         this.messageUtils = messageUtils;
         this.updateProducer = updateProducer;
+        this.commandConfig = commandConfig;
     }
 
     public void registerBot(TelegramBot telegramBot) {
@@ -48,10 +55,6 @@ public class UpdateController {
         var msg = update.getMessage();
         if (msg.hasText()) {
             processTextMessage(update);
-        } else if (msg.hasDocument()) {
-            processDocumentMessage(update);
-        } else if (msg.hasPhoto()) {
-            processPhotoMessage(update);
         } else {
             setUnsupportedTypeMessage(update);
         }
@@ -62,16 +65,21 @@ public class UpdateController {
         setView(sendMessage);
     }
 
-    private void processPhotoMessage(Update update) {
-        updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
-    }
-
-    private void processDocumentMessage(Update update) {
-        updateProducer.produce(DOC_MESSAGE_UPDATE, update);
-    }
-
     private void processTextMessage(Update update) {
-        updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
+        Optional<BotCommand> command = commandConfig.itsCommand(update);
+        switch (command.map(BotCommand::getCommand).orElse("")) {
+            case "/weather":
+                System.out.println("Switch to weather");
+                break;
+            case "/chat":
+                System.out.println("Switch to chat");
+                break;
+            case "/help":
+                System.out.println("Info help");
+                break;
+            default:
+                updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
+        }
     }
 
     public void setView(SendMessage sndMsg) {

@@ -17,8 +17,8 @@
 
     <modules>
         <module>tgbot</module>
-        <module>rabbitMq</module>
-        <module>node</module>
+        <module>weather</module>
+        <module>feature</module>
     </modules>
 
     <properties>
