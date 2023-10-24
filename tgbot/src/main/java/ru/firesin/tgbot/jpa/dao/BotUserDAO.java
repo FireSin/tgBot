@@ -1,7 +1,7 @@
-package ru.firesin.feature.jpa.dao;
+package ru.firesin.tgbot.jpa.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.firesin.feature.jpa.BotUser;
+import ru.firesin.tgbot.jpa.BotUser;
 
 /**
  * Author:    firesin

@@ -1,4 +1,4 @@
-package ru.firesin.feature.jpa.enums;
+package ru.firesin.tgbot.jpa.enums;
 
 /**
  * Author:    firesin

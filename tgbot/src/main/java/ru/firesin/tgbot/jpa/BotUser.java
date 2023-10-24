@@ -1,8 +1,8 @@
-package ru.firesin.feature.jpa;
+package ru.firesin.tgbot.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.firesin.feature.jpa.enums.UserState;
+import ru.firesin.tgbot.jpa.enums.UserState;
 
 /**
  * Author:    firesin

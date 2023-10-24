@@ -6,3 +6,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/db_bot
   jpa:
     generate-ddl: true
+    open-in-view: false

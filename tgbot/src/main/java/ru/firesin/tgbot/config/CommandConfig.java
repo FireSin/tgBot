@@ -18,12 +18,16 @@ import java.util.Optional;
 @Component
 public class CommandConfig {
     private final List<BotCommand> botCommands;
+    private final List<BotCommand> adminCommands;
 
     public CommandConfig() {
         botCommands = new ArrayList<>();
         botCommands.add(new BotCommand("/weather", "Канал запроса погоды"));
         botCommands.add(new BotCommand("/chat", "Канал общения с чатом"));
         botCommands.add(new BotCommand("/help", "Где я, кто я..."));
+        adminCommands = new ArrayList<>();
+        adminCommands.add(new BotCommand("/add_user", "Добавить пользователя"));
+        adminCommands.add(new BotCommand("/rm_user", "Удалить пользователя"));
     }
 
     public Optional<BotCommand> itsCommand(Update update){

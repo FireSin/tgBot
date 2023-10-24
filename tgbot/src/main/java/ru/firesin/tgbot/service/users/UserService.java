@@ -1,14 +1,16 @@
 package ru.firesin.tgbot.service.users;
 
-import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
+import ru.firesin.tgbot.jpa.BotUser;
 
 /**
  * Author:    firesin
  * Date:      23.10.2023
  */
 public interface UserService {
-    Boolean check(Update update);
-    void addUser(Update update);
+    Boolean check(User botUser);
 
-    void deleteUser(Update update);
+    BotUser addUser(User botUser);
+
+    void deleteUser(User botUser);
 }
