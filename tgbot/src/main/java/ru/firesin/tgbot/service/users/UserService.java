@@ -1,7 +1,10 @@
 package ru.firesin.tgbot.service.users;
 
+import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.User;
 import ru.firesin.tgbot.jpa.BotUser;
+import ru.firesin.tgbot.jpa.enums.UserRole;
+import ru.firesin.tgbot.jpa.enums.UserState;
 
 /**
  * Author:    firesin
@@ -13,4 +16,10 @@ public interface UserService {
     BotUser addUser(User botUser);
 
     void deleteUser(User botUser);
+
+    UserRole getRole(User botUser);
+
+    BotUser addUser(Contact contact);
+
+    BotUser setState(User botUser, UserState userState);
 }

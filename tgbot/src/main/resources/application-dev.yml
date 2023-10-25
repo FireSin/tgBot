@@ -6,4 +6,6 @@ spring:
   config:
     import: "classpath:bot-config.yml, classpath:rabbit-config.yml, classpath:db_config.yml"
 server:
-  port: 8083
+  port: 8080
+  ssl:
+    enabled: false

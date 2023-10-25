@@ -2,6 +2,7 @@ package ru.firesin.tgbot.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.firesin.tgbot.jpa.enums.UserRole;
 import ru.firesin.tgbot.jpa.enums.UserState;
 
 /**
@@ -22,6 +23,8 @@ public class BotUser {
     private String username;
     private String firstname;
     private String lastname;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
     @Enumerated(EnumType.STRING)
     private UserState userState;
 }

@@ -1,7 +1,10 @@
 package ru.firesin.tgbot.jpa.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ru.firesin.tgbot.jpa.BotUser;
+import ru.firesin.tgbot.jpa.enums.UserRole;
 
 /**
  * Author:    firesin
@@ -9,5 +12,11 @@ import ru.firesin.tgbot.jpa.BotUser;
  */
 
 public interface BotUserDAO extends JpaRepository<BotUser, Long> {
-    public BotUser findBotUserById(Long id);
+    BotUser findBotUserById(Long id);
+
+    @Query("SELECT u.userRole FROM BotUser u WHERE u.id = :id")
+    UserRole findUserRoleById(@Param("id") Long id);
+
+    void deleteBotUserById(Long id);
+
 }
