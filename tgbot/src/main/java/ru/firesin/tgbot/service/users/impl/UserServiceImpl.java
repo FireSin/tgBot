@@ -30,9 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BotUser addUser(User botUser) {
-        BotUser user = botUserDAO.findBotUserById(botUser.getId());
-
-        return user != null ? user : botUserDAO.save(BotUser.builder()
+        return botUserDAO.save(BotUser.builder()
                 .id(botUser.getId())
                 .firstname(botUser.getFirstName())
                 .lastname(botUser.getLastName())
