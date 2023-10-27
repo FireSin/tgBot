@@ -3,4 +3,4 @@ server:
 
 spring:
   config:
-    import: "classpath:rabbit-config.yml"
+    import: "classpath:rabbit-config.yml, classpath:WeatherConfig.yml"

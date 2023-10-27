@@ -17,11 +17,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @AllArgsConstructor
 public class WebHookController {
 
-    private final TelegramBot telegramBot;
+    private final UpdateProcessor updateProcessor;
 
     @RequestMapping(value = "/callback/update", method = RequestMethod.POST)
     public ResponseEntity<?> onUpdateReceived(@RequestBody Update update){
-        telegramBot.onWebhookUpdateReceived(update);
+        updateProcessor.processUpdate(update);
         return ResponseEntity.ok().build();
     }
 }

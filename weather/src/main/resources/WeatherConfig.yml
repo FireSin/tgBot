@@ -1,0 +1,4 @@
+OpenWeatherMap:
+  name: bot
+  key: 758c2372fe3825ea7b2f826298ed6ba0
+  url: http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}

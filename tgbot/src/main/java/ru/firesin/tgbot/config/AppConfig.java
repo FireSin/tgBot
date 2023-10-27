@@ -4,10 +4,9 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import static ru.firesin.feature.rabbitMq.RabbitQueue.*;
+import static ru.firesin.rabbitMq.RabbitQueue.*;
 
 /**
  * Author:    firesin
@@ -15,7 +14,6 @@ import static ru.firesin.feature.rabbitMq.RabbitQueue.*;
  */
 
 @Configuration
-@ComponentScan(basePackages = "ru.firesin")
 public class AppConfig {
 
     @Bean
@@ -24,18 +22,13 @@ public class AppConfig {
     }
 
     @Bean
-    public Queue textMessageQueue() {
-        return new Queue(TEXT_MESSAGE_UPDATE);
+    public Queue weatherMessageQueue() {
+        return new Queue(WEATHER_MESSAGE_UPDATE);
     }
 
     @Bean
-    public Queue photoMessageQueue() {
-        return new Queue(PHOTO_MESSAGE_UPDATE);
-    }
-
-    @Bean
-    public Queue docMessageQueue() {
-        return new Queue(DOC_MESSAGE_UPDATE);
+    public Queue chatMessageQueue() {
+        return new Queue(CHAT_MESSAGE_UPDATE);
     }
 
     @Bean

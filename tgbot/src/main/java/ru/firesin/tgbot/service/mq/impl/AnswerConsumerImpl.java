@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import ru.firesin.tgbot.controller.UpdateProcessor;
+import ru.firesin.tgbot.controller.TelegramBot;
 import ru.firesin.tgbot.service.mq.AnswerConsumer;
 
-import static ru.firesin.feature.rabbitMq.RabbitQueue.ANSWER_MESSAGE;
+import static ru.firesin.rabbitMq.RabbitQueue.ANSWER_MESSAGE;
 
 /**
  * Author:    firesin
@@ -20,10 +20,10 @@ import static ru.firesin.feature.rabbitMq.RabbitQueue.ANSWER_MESSAGE;
 @Service
 public class AnswerConsumerImpl implements AnswerConsumer {
 
-    private final UpdateProcessor updateProcessor;
+    private final TelegramBot telegramBot;
     @Override
     @RabbitListener(queues = ANSWER_MESSAGE)
     public void consume(SendMessage sendMessage) {
-        updateProcessor.setView(sendMessage);
+        telegramBot.sendAnswer(sendMessage);
     }
 }

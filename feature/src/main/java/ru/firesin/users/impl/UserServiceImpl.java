@@ -1,17 +1,14 @@
-package ru.firesin.tgbot.service.users.impl;
+package ru.firesin.users.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.User;
-import ru.firesin.tgbot.jpa.BotUser;
-import ru.firesin.tgbot.jpa.dao.BotUserDAO;
-import ru.firesin.tgbot.jpa.enums.UserRole;
-import ru.firesin.tgbot.jpa.enums.UserState;
-import ru.firesin.tgbot.service.users.UserService;
-
-import static ru.firesin.tgbot.jpa.enums.UserRole.USER;
-import static ru.firesin.tgbot.jpa.enums.UserState.CHAT;
+import ru.firesin.users.UserService;
+import ru.firesin.users.entity.BotUser;
+import ru.firesin.users.repository.BotUserDAO;
+import ru.firesin.users.enums.UserRole;
+import ru.firesin.users.enums.UserState;
 
 /**
  * Author:    firesin
@@ -35,8 +32,8 @@ public class UserServiceImpl implements UserService {
                 .firstname(botUser.getFirstName())
                 .lastname(botUser.getLastName())
                 .username(botUser.getUserName())
-                .userRole(USER)
-                .userState(CHAT)
+                .userRole(UserRole.USER)
+                .userState(UserState.CHAT)
                 .build());
     }
 
@@ -57,8 +54,8 @@ public class UserServiceImpl implements UserService {
                 .id(contact.getUserId())
                 .firstname(contact.getFirstName())
                 .lastname(contact.getLastName())
-                .userRole(USER)
-                .userState(CHAT)
+                .userRole(UserRole.USER)
+                .userState(UserState.CHAT)
                 .build());
     }
 
@@ -67,5 +64,15 @@ public class UserServiceImpl implements UserService {
         BotUser user = botUserDAO.findBotUserById(botUser.getId());
         user.setUserState(userState);
         return botUserDAO.save(user);
+    }
+
+    @Override
+    public BotUser findUser(User botUser) {
+        return botUserDAO.findBotUserById(botUser.getId());
+    }
+
+    @Override
+    public void saveUser(BotUser botUser) {
+        botUserDAO.save(botUser);
     }
 }

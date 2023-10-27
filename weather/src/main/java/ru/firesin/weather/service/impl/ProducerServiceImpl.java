@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.firesin.weather.service.ProducerService;
 
-import static ru.firesin.feature.rabbitMq.RabbitQueue.ANSWER_MESSAGE;
+import static ru.firesin.rabbitMq.RabbitQueue.ANSWER_MESSAGE;
 
 
 /**

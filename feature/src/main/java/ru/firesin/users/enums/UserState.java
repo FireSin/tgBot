@@ -1,4 +1,4 @@
-package ru.firesin.tgbot.jpa.enums;
+package ru.firesin.users.enums;
 
 /**
  * Author:    firesin
@@ -6,5 +6,6 @@ package ru.firesin.tgbot.jpa.enums;
  */
 public enum UserState {
     WEATHER,
-    CHAT
+    CHAT,
+    ADMIN
 }

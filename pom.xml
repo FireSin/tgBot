@@ -19,6 +19,7 @@
         <module>tgbot</module>
         <module>weather</module>
         <module>feature</module>
+        <module>rabbitMQ</module>
     </modules>
 
     <properties>

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppNode
+public class WeatherApp
 {
     public static void main(String[] args) {
-        SpringApplication.run(AppNode.class, args);
+        SpringApplication.run(WeatherApp.class, args);
     }
 }
