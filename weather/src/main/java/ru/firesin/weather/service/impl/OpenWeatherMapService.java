@@ -1,9 +1,11 @@
 package ru.firesin.weather.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
+import ru.firesin.weather.model.WeatherNow;
 import ru.firesin.weather.service.WeatherService;
 
 /**
@@ -12,31 +14,38 @@ import ru.firesin.weather.service.WeatherService;
  */
 
 @Service
+@Slf4j
 public class OpenWeatherMapService implements WeatherService {
 
-    @Value("${OpenWeatherMap.url}")
-    private String apiUrl;
+    private final RestTemplate restTemplate;
+    private final String apiUrlWeather;
+    private final String apiKey;
 
-    private int limit = 1;
-
-    private final WebClient webClient;
-
-    public OpenWeatherMapService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(apiUrl).build();
+    public OpenWeatherMapService(@Value("${OpenWeatherMap.urlGetWeather}") String apiUrlWeather,
+                                 @Value("${OpenWeatherMap.key}") String apiKey) {
+        this.restTemplate = new RestTemplate();
+        this.apiUrlWeather = apiUrlWeather;
+        this.apiKey = apiKey;
     }
 
-    public Mono<String> fetchCityData(String cityName, String apiKey) {
-        String url = apiUrl.replace("{city name}", cityName)
-                .replace("{limit}", String.valueOf(limit))
-                .replace("{API key}", apiKey);
-
-        return webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(String.class);
-    }
     @Override
     public String getWeather(String city) {
-        return null;
+        try {
+            return weatherData(city).toString();
+        } catch (HttpStatusCodeException e) {
+            if (e.getResponseBodyAsString().contains("city not found")) {
+                return "Неправильно задан город.";
+            } else {
+                log.error("Сервис погоды: " + e.getMessage());
+                return "Сервис недоступен. Попробуйте позже";
+            }
+        }
+    }
+
+    private WeatherNow weatherData(String city) {
+        String url = apiUrlWeather.replace("{city}", city)
+                .replace("{API key}", apiKey);
+
+        return restTemplate.getForObject(url, WeatherNow.class);
     }
 }

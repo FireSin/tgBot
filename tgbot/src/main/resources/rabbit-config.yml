@@ -4,3 +4,8 @@ spring:
     port: 5672
     username: firesin
     password: pass1@Data1
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+        initial-interval: 1000ms

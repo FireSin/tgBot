@@ -6,5 +6,5 @@ package ru.firesin.weather.service;
  */
 public interface WeatherService {
 
-    String getWeather(String city);
+    String getWeather(String city) throws RuntimeException;
 }

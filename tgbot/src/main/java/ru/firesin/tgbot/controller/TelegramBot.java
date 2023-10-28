@@ -65,8 +65,7 @@ public class TelegramBot extends TelegramWebhookBot {
             execute(msg);
             log.debug("Ответ отправлен");
         } catch (TelegramApiException e) {
-            log.error("Ошибка отправки сообщения");
-            throw new RuntimeException(e);
+            log.error("Ошибка отправки сообщения: " + e.getMessage());
         }
     }
 

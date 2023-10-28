@@ -10,7 +10,7 @@ import ru.firesin.weather.service.ConsumerService;
 import ru.firesin.weather.service.ProducerService;
 import ru.firesin.weather.service.WeatherService;
 
-import static ru.firesin.rabbitMq.RabbitQueue.*;
+import static ru.firesin.rabbitMq.RabbitQueue.WEATHER_MESSAGE_UPDATE;
 
 
 /**
@@ -28,13 +28,12 @@ public class ConsumerServiceImpl implements ConsumerService {
     @Override
     @RabbitListener(queues = WEATHER_MESSAGE_UPDATE)
     public void consumeWeatherMessage(Update update) {
-        log.info("Текстовое сообщение получено в погоде получено");
-
-        var result = weatherService.getWeather(update.getMessage().getText());
-
+        log.debug("Текстовое сообщение получено в погоде получено");
+        String result;
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(update.getMessage().getChat().getId());
         sendMessage.setMessageThreadId(update.getMessage().getMessageThreadId());
+        result = weatherService.getWeather(update.getMessage().getText());
         sendMessage.setText(result);
         producerService.produceAnswer(sendMessage);
     }
