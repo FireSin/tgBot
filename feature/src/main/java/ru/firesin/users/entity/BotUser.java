@@ -5,6 +5,7 @@ import lombok.*;
 import ru.firesin.users.enums.UserRole;
 import ru.firesin.users.enums.UserState;
 
+
 /**
  * Author:    firesin
  * Date:      23.10.2023
@@ -23,10 +24,10 @@ public class BotUser {
     private String username;
     private String firstname;
     private String lastname;
+    private String City;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     @Enumerated(EnumType.STRING)
     private UserState userState;
 }
-
 

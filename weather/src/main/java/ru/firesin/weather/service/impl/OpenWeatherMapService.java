@@ -34,10 +34,10 @@ public class OpenWeatherMapService implements WeatherService {
             return weatherData(city).toString();
         } catch (HttpStatusCodeException e) {
             if (e.getResponseBodyAsString().contains("city not found")) {
-                return "Неправильно задан город.";
+                return "404";
             } else {
                 log.error("Сервис погоды: " + e.getMessage());
-                return "Сервис недоступен. Попробуйте позже";
+                return "502";
             }
         }
     }

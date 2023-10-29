@@ -6,11 +6,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.firesin.rabbitMq.producer.UpdateProducer;
 import ru.firesin.weather.service.ConsumerService;
-import ru.firesin.weather.service.ProducerService;
 import ru.firesin.weather.service.WeatherService;
 
-import static ru.firesin.rabbitMq.RabbitQueue.WEATHER_MESSAGE_UPDATE;
+import static ru.firesin.rabbitMq.Queue.RabbitQueue.WEATHER_MESSAGE_ANSWER;
+import static ru.firesin.rabbitMq.Queue.RabbitQueue.WEATHER_MESSAGE_UPDATE;
 
 
 /**
@@ -22,7 +23,7 @@ import static ru.firesin.rabbitMq.RabbitQueue.WEATHER_MESSAGE_UPDATE;
 @AllArgsConstructor
 public class ConsumerServiceImpl implements ConsumerService {
 
-    private final ProducerService producerService;
+    private final UpdateProducer producerService;
     private final WeatherService weatherService;
 
     @Override
@@ -35,6 +36,6 @@ public class ConsumerServiceImpl implements ConsumerService {
         sendMessage.setMessageThreadId(update.getMessage().getMessageThreadId());
         result = weatherService.getWeather(update.getMessage().getText());
         sendMessage.setText(result);
-        producerService.produceAnswer(sendMessage);
+        producerService.produce(WEATHER_MESSAGE_ANSWER, sendMessage);
     }
 }

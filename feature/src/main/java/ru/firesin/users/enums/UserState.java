@@ -2,10 +2,10 @@ package ru.firesin.users.enums;
 
 /**
  * Author:    firesin
- * Date:      23.10.2023
+ * Date:      28.10.2023
  */
 public enum UserState {
-    WEATHER,
     CHAT,
-    ADMIN
+    CITY_WAIT,
+    RM
 }
