@@ -62,14 +62,18 @@ public class CommandServiceImpl implements CommandService {
 
     private void processStartCommand(Update update) {
         userService.addUser(update.getMessage().getFrom());
-        sendMsg.sendMessage(update, "Начинаем начинать!\n" +
-                "Чтобы общаться с ботом просто пишите, что хотите знать.\n" +
-                " Чтобы узнать погоду отправте команду /weather, или тыкнете ее в меню.");
+        sendMsg.sendMessage(update, """
+                Начинаем начинать!
+                Чтобы общаться с ботом просто пишите, что хотите знать.
+                Чтобы узнать погоду отправте команду /weather, или тыкнете ее в меню.
+                """);
     }
 
     private void processHelpCommand(Update update) {
-        sendMsg.sendMessage(update, "Чтобы общаться с ботом просто пишите, что хотите знать." +
-                " Чтобы узнать погоду отправте команду /weather, или тыкнете ее в меню. После получения погоды можете " +
-                "продолжать общаться в чате.");
+        sendMsg.sendMessage(update, """
+            Чтобы общаться с ботом просто пишите, что хотите знать.
+            Чтобы узнать погоду отправте команду /weather, или тыкнете ее в меню.
+            После получения погоды можете продолжать общаться в чате.
+            """);
     }
 }

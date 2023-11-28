@@ -1,4 +1,4 @@
-package ru.firesin.weather.config;
+package ru.firesin.thebAi.config;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -7,12 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Author:    firesin
- * Date:      18.10.2023
+ * Date:      30.10.2023
  */
 
 @Configuration
-public class NodeConfig {
-
+public class TheBAiConfig {
     @Bean
     public MessageConverter jsonMessageConverter(){
         return new Jackson2JsonMessageConverter();

@@ -1,0 +1,6 @@
+TheBAi:
+  api-key: sk-6AhqEYkLgxpwjEApcjMFVGhlQi5BSQKSsROq8dXLyweywVUN
+  urlPostTheBAi: https://api.theb.ai/v1/chat/completions
+  model: code-llama-13b
+  stream: false
+  temperature: 0.8

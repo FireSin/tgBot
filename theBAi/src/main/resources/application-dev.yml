@@ -1,0 +1,6 @@
+server:
+  port: 8089
+
+spring:
+  config:
+    import: "classpath:rabbit-config.yml, classpath:TheBAiConfig.yml"

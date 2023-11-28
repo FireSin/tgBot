@@ -20,6 +20,8 @@
         <module>feature</module>
         <module>rabbitMQ</module>
         <module>telegramBot</module>
+        <module>theBAi</module>
+        <module>spoonacular</module>
     </modules>
 
     <properties>
